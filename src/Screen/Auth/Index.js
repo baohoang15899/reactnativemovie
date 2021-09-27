@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, TextInput, ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, TextInput, ScrollView, Alert} from 'react-native';
 import Header from '../../Component/Auth/Header';
 import {darkMode} from './style';
 import Google from 'react-native-vector-icons/AntDesign';
@@ -7,15 +7,58 @@ import Apple from 'react-native-vector-icons/AntDesign';
 import Block from '../../Component/Auth/OptionBlock';
 import Input from '../../Component/Auth/Input';
 import FBtn from '../../Component/Auth/LinearBtn';
-
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {REGISTER} from './constants';
 export default function Index() {
+  const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [pass, setPass] = useState('');
+  const [rePass, setRePass] = useState('');
+  const [status, setStatus] = useState(true);
+  const [nameCheck, setNameCheck] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (pass.length > 0 && rePass.length > 0) {
+      if (pass === rePass) {
+        setStatus(true);
+      } else {
+        setStatus(false);
+      }
+      if (name.length > 20) {
+        setNameCheck(false);
+      } else {
+        setNameCheck(true);
+      }
+    } else {
+      setStatus(true);
+    }
+  }, [rePass, name, pass] );
+
+  const handleRegister = () => {
+    if (
+      name.length > 0 &&
+      pass.length > 0 &&
+      email.length > 0 &&
+      rePass.length > 0
+    ) {
+      if (pass === rePass) {
+        dispatch({type: REGISTER, payload: {email, pass, name}});
+      }
+    } else {
+      Alert.alert('Warning', "Don't leave the text box empty");
+    }
+  };
+
   return (
     <View style={darkMode.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <Header title="Sign up" />
         <View style={darkMode.option}>
           <Text style={darkMode.textOption}>
-            Sign up with one of the following options
+            Sign up with one of the following options:
           </Text>
           <View style={darkMode.block}>
             <Block icon={<Google name="google" size={20} color="#fff" />} />
@@ -23,16 +66,40 @@ export default function Index() {
           </View>
         </View>
         <View style={darkMode.inputGroup}>
-          <Input title="Name" placeholder="name" />
-          <Input title="Email" placeholder="email" />
-          <Input title="Password" placeholder="password" />
+          <Input title="Name" placeholder="name" onPress={e => setName(e)} />
+          {!nameCheck && (
+            <Text style={{color: 'red', marginTop: 10}}>
+              Your name is invalid
+            </Text>
+          )}
+          <Input title="Email" placeholder="email" onPress={e => setEmail(e)} />
+          <Input
+            title="Password"
+            placeholder="password"
+            onPress={e => setPass(e)}
+            ser={true}
+          />
+          <Input
+            title="Re-Password"
+            placeholder="re-password"
+            onPress={e => setRePass(e)}
+            ser={true}
+          />
+          {!status && (
+            <Text style={{color: 'red', marginTop: 10}}>
+              Password is not match
+            </Text>
+          )}
         </View>
-        <View />
-        <FBtn btn="Create Account" />
-        <View style={{flex: 1}}>
+        <FBtn btn="Create Account" onPress={() =>handleRegister()} />
+        <View style={{flex: 1, marginTop: 10}}>
           <Text style={{textAlign: 'center', color: '#fff', fontSize: 16}}>
             Already have an account?{' '}
-            <Text style={{fontWeight: 'bold'}}>Login</Text>
+            <Text
+              onPress={() => navigation.navigate('Login')}
+              style={{fontWeight: 'bold'}}>
+              Login
+            </Text>
           </Text>
         </View>
       </ScrollView>

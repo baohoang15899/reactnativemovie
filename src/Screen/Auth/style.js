@@ -45,18 +45,20 @@ export const darkMode = StyleSheet.create({
     marginLeft: 18,
   },
   textOption: {
+    flex:1,
     color: '#9A9A9A',
   },
   option: {
     flex: 1,
+    marginTop:'4%'
   },
   block: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    marginTop: 10,
+    marginTop:'4%'
   },
   inputGroup: {
+    flex:1,
     marginBottom: 10,
   },
 });

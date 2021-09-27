@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet,Dimensions} from 'react-native';
 
 export const lightMode = StyleSheet.create({
   container: {
@@ -19,6 +19,8 @@ export const lightMode = StyleSheet.create({
   },
 });
 
+const {width,height} = Dimensions.get('window')
+
 export const darkMode = StyleSheet.create({
   container: {
     flex: 1,
@@ -27,6 +29,7 @@ export const darkMode = StyleSheet.create({
   },
   header: {
     flex: 1,
+    marginTop:'4%',
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -52,7 +55,8 @@ export const darkMode = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 5,
-    paddingVertical: 8,
+    width:width * 0.2,
+    height:height *0.1
   },
   input: {
     backgroundColor: '#2e2e2e',
@@ -66,5 +70,9 @@ export const darkMode = StyleSheet.create({
   btn: {
     flex: 1,
     marginTop: 30,
+  },
+  borderInput: {
+    borderWidth: 1,
+    borderColor: '#db3445',
   },
 });

@@ -1,1 +1,23 @@
-export const LOGIN = 'LOGIN'
+export const REGISTER = 'REGISTER';
+export const LOGIN_STATUS = 'LOGIN_STATUS';
+
+export const GET_USER = 'GET_USER'
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
+
+export const LOG_OUT = 'LOG_OUT'
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'
+
+export const LOG_IN = 'LOG_IN'
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'
+
+export const LOADING = "LOADING"
+export const LOADING_SUCCESS = "LOADING_SUCCESS"
+
+export const UPDATE_PROFILE = "UPDATE_PROFILE"
+export const UPDATE_PROFILE_SUCCESS = "UPDATE_PROFILE_SUCCESS"
+
+export const NAVIGATE = "NAVIGATE"
+export const NAVIGATE_SUCCESS = "NAVIGATE_SUCCESS"
+
+export const UPDATE_AVATAR = "UPDATE_AVARTAR"
+export const UPDATE_AVATAR_SUCCESS = "UPDATE_AVARTAR_SUCCESS"
