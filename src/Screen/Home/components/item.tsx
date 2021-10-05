@@ -1,14 +1,18 @@
 import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions, Image, Pressable, FlatList } from 'react-native'
+import { useDispatch } from 'react-redux'
 import index from '..'
 import { COLOR, FONT } from '../../../GlobalStyle'
 import { imgUrl } from '../../../ImgUrl/url'
 import { HomeScreen } from '../../../Navigation/Stack'
+import { CLEAR_DATA_DETAIL } from '../../MovieDetail/constants'
 const { width, height } = Dimensions.get('window')
 export default function item({movie,type }:any) {
     const navigate = useNavigation()
+    const dispatch = useDispatch()
     const handlePress = (id:any) => {
+        dispatch({type:CLEAR_DATA_DETAIL})
         navigate.push(HomeScreen.MOVIE_DETAIL, { id: id, type: type })
     }
 

@@ -3,6 +3,7 @@ import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
 import { useDispatch } from 'react-redux'
 import Home from '../../Screen/Home/index'
 import Info from '../../Screen/Info/index'
+import MyList from '../../Screen/Favorite/index'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen } from '../Stack'
@@ -12,30 +13,40 @@ const Tab = createBottomTabNavigator();
 
 export default function HomePage() {
     return (
-        <Tab.Navigator screenOptions={{
+        <Tab.Navigator screenOptions={({ route }) => ({
             headerShown: false, tabBarStyle: {
                 backgroundColor: COLOR.LIGHTBLACK,
                 borderTopColor: "transparent",
-            }, 
+            },
             tabBarInactiveTintColor: COLOR.PINK,
             tabBarActiveTintColor: COLOR.RED,
-        }}>
+            tabBarLabelStyle: style.label,
+            tabBarIconStyle: style.icon,
+            tabBarIcon: ({ color }) => {
+                switch (route.name) {
+                    case HomeScreen.HOME:
+                        return <Icon name="home" size={22} color={color} />
+                    case HomeScreen.INFO:
+                        return <Icon name="user" size={22} color={color} />
+                    case HomeScreen.FAVORTIE:
+                        return <Icon name="heart" size={22} color={color} />
+                    default:
+                        break;
+                }
+            }
+        })}>
             <Tab.Screen options={{
                 tabBarLabel: 'Home',
-                tabBarLabelStyle: style.label,
-                tabBarIconStyle: style.icon,
-                tabBarIcon: ({ color }) => (
-                    <Icon name="home" size={22} color={color} />
-                ),
-            }} name={HomeScreen.HOME} component={Home} />
+            }}
+                name={HomeScreen.HOME} component={Home} />
+            <Tab.Screen options={{
+                tabBarLabel: 'My list',
+            }}
+                name={HomeScreen.FAVORTIE} component={MyList} />
             <Tab.Screen options={{
                 tabBarLabel: 'Profile',
-                tabBarLabelStyle: style.label,
-                tabBarIconStyle: style.icon,
-                tabBarIcon: ({ color }) => (
-                    <Icon name="user" size={22} color={color} />
-                )
-            }} name={HomeScreen.INFO} component={Info} />
+            }}
+                name={HomeScreen.INFO} component={Info} />
         </Tab.Navigator>
         // <Home/>
     )

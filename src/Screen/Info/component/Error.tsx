@@ -1,9 +1,8 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { Ierror } from '../../../Interfaces'
 
-interface Ierror {
-    title:string
-}
+
 
 export default function Error({title}:Ierror) {
     return (

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { View, Text, SafeAreaView, ImageBackground, Image, ScrollView, Pressable } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { styles } from './style'
-import { GET_CAST, GET_DETAIL, GET_RECOMMENDATION } from './constants'
+import { CLEAR_DATA_DETAIL, GET_CAST, GET_DETAIL, GET_RECOMMENDATION } from './constants'
 import Header from '../../Component/Header'
 import Section from './component/section'
 import { imgUrl } from '../../ImgUrl/url'
@@ -45,11 +45,16 @@ export default function index({ route }) {
         setFavorite(!favorite)
     }
 
+    const handlePress = () =>{
+        dispatch({type:CLEAR_DATA_DETAIL})
+        navigation.goBack()
+    }
+
     return useMemo(() => (
         <SafeAreaView style={styles.container}>
             {data &&
                 <View style={styles.container}>
-                    <Header title={type === 'movie' ? data?.original_title : data?.name} />
+                    <Header onPress={handlePress} title={type === 'movie' ? data?.original_title : data?.name} />
                     <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
                         <ImageBackground resizeMode="cover" style={styles.imgBg} source={{ uri: backdrop_path && `${imgUrl.IMG_BG}${backdrop_path}` } as any}>
                             <View style={styles.backCover}></View>
@@ -72,7 +77,7 @@ export default function index({ route }) {
                                     content={<View style={styles.genres}>
                                         {genres?.map((item: any, i: any) => {
                                             return <Text
-                                                style={i !== 0 ? styles.genresText : [styles.genresText, { marginLeft: 0 }]}
+                                                style={i == 0 || i == genres.length-1 ? [styles.genresText, { marginLeft: 0 }] : styles.genresText}
                                                 key={item.id}>
                                                 {item.name}
                                             </Text>

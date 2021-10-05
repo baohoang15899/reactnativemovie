@@ -3,7 +3,6 @@ import { CLEAR_DATA_DETAIL, GET_DETAIL, GET_DETAIL_SUCCESS, GET_CAST, GET_CAST_S
 import { cast, detail, recommend } from '../../Api/Service'
 
 function* handleGetDetail({ payload }: any) {
-    yield put({ type: CLEAR_DATA_DETAIL })
     try {
         const data = yield call(detail, payload)
         yield put({ type: GET_DETAIL_SUCCESS, payload: { info: data } })

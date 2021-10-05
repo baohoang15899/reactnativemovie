@@ -3,18 +3,23 @@ import { View, Text, StyleSheet, SafeAreaView, Pressable } from 'react-native'
 import { COLOR, FONT } from '../GlobalStyle'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
-
-interface Iheader {
-    title: string,
-    onPress: () => void
-}
+import { useDispatch } from 'react-redux';
+import { CLEAR_DATA_DETAIL } from '../Screen/MovieDetail/constants';
+import { Iheader } from '../Interfaces';
 
 
-export default function Header({ title}) {
+
+
+export default function Header({title,onPress}:Iheader) {
     const navigate = useNavigation()
+    // const dispatch = useDispatch()
+    // // const handlePress = () =>{
+    // //     dispatch({type:CLEAR_DATA_DETAIL})
+    // //     navigate.goBack()
+    // // }
     return (
         <View style={styles.header}>
-        <Pressable onPress={() => navigate.canGoBack() && navigate.goBack()}>
+        <Pressable onPress={() => navigate.canGoBack() && onPress() }>
             <View>
                 <Icon name="chevron-left" size={20} color="#fff" />
             </View>

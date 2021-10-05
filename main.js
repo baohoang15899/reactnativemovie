@@ -14,7 +14,7 @@ export default function main() {
     const saveId = async(id) => {
         try {
             await AsyncStorage.setItem('userId', id)
-            dispatch({type:GET_USER,payload:{id:id}})
+            // dispatch({type:GET_USER,payload:{id:id}})
         } catch (error) {
             console.log(error);
         }
@@ -43,7 +43,7 @@ export default function main() {
         })
         const getId = async() => {
             const id = await AsyncStorage.getItem('userId')
-            if (id) {
+            if (id && !user) {
                 dispatch({type:GET_USER,payload:{id:id}})
             }
         }

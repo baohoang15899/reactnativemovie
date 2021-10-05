@@ -1,14 +1,9 @@
 import React from 'react'
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import { COLOR } from '../../../GlobalStyle'
+import { Iinput } from '../../../Interfaces'
 
-interface Iinput {
-    title:string,
-    editable:boolean,
-    value:any,
-    placeholder:any,
-    textChanged: (e:any) => void
-}
+
 
 export default function Input({title,editable,value,placeholder,textChanged}:Iinput) {
     return (

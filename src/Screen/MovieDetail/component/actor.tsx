@@ -7,11 +7,6 @@ import { COLOR, FONT } from '../../../GlobalStyle'
 import { imgUrl } from '../../../ImgUrl/url'
 import { HomeScreen } from '../../../Navigation/Stack'
 
-interface Iactor {
-    title: string,
-    image: string,
-    id: string,
-}
 
 const { width, height } = Dimensions.get('window')
 

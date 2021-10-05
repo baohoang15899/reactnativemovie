@@ -6,7 +6,7 @@ import {moviePopular,searchMutil,tvPopular} from '../../Api/Service'
 function* handleMovie(){
     try {
       const data = yield call(moviePopular)
-      yield put({type:GET_MOVIE_SUCCESS,payload: {movies:data}})
+      yield put({type:GET_MOVIE_SUCCESS,payload: {movies:data.results}})
     } catch (error) {
         console.log(error);
     }
@@ -15,7 +15,7 @@ function* handleMovie(){
 function* handleTV(){
     try {
       const data = yield call(tvPopular)
-      yield put({type:GET_TV_SUCCESS,payload: {tv:data}})
+      yield put({type:GET_TV_SUCCESS,payload: {tv:data.results}})
     } catch (error) {
         console.log(error);
     }

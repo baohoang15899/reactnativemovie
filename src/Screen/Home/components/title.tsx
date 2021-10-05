@@ -1,12 +1,10 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { categoryTitle } from '../../../Interfaces'
 
-interface type {
-    title:string,
-    style:object
-}
 
-export default function title({title,style}:type) {
+
+export default function title({title,style}:categoryTitle) {
     return (
         <Text style={style}>{title}</Text>
     )

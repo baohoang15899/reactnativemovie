@@ -3,5 +3,6 @@ export enum HomeScreen {
     HOME = 'HOME',
     INFO = 'INFO',
     UPDATE_PROFILE = 'UPDATE_PROFILE',
-    MOVIE_DETAIL = 'MOVIE_DETAIL'
+    MOVIE_DETAIL = 'MOVIE_DETAIL',
+    FAVORTIE='FAVORTIE'
 }

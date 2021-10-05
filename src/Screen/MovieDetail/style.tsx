@@ -47,7 +47,8 @@ export const styles = StyleSheet.create({
         paddingVertical:5,
         backgroundColor:COLOR.LIGHTBLACK,
         borderRadius:8,
-        marginLeft:8
+        marginVertical:2,
+        marginHorizontal:5
     },
     title:{
         fontFamily:'Roboto-Bold',
@@ -64,7 +65,8 @@ export const styles = StyleSheet.create({
     },
     genres:{
         flexDirection:'row',
-        flexWrap:'wrap'
+        flexWrap:'wrap',
+        width:width*1
     },
     date:{
         fontFamily:'Roboto-Bold',

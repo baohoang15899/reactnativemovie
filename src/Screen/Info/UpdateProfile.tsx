@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import styles from './style'
 import Header from '../../Component/Header'
 import Btn from '../../Component/Btn'
@@ -12,7 +12,7 @@ import { HomeScreen } from '../../Navigation/Stack'
 export default function UpdateProfile() {
     const data = useSelector(state => state.auth.user)
     const navigateStatus = useSelector(state => state.auth.navigate)
-    const { name, email, age,id } = data
+    const { name, email, age, id } = data
     const [userName, setUserName] = useState(name)
     const [userAge, setUserAge] = useState<any>(age !== '' ? age : '')
     const [checkAge, setCheckAge] = useState(false)
@@ -21,18 +21,18 @@ export default function UpdateProfile() {
 
     const dispatch = useDispatch()
     const navigate = useNavigation()
-    
+
     useEffect(() => {
         if (userName?.length > 0 &&
             userAge?.length > 0 &&
             !checkAge &&
             !checkName) {
-                setCheckSubmit(true)
+            setCheckSubmit(true)
         }
-        else{
+        else {
             setCheckSubmit(false)
         }
-    },[userName,userAge])
+    }, [userName, userAge])
 
     const handleAge = (e: any) => {
         const reg = /\s/g
@@ -59,22 +59,24 @@ export default function UpdateProfile() {
         setUserName(e)
     }
 
-    const handleSubmit = () =>{
-        dispatch({type:UPDATE_PROFILE,payload:{id:id,name:userName,age:userAge}})
+    const handleSubmit = () => {
+        dispatch({ type: UPDATE_PROFILE, payload: { id: id, name: userName, age: userAge } })
         navigate.canGoBack() && navigate.goBack()
     }
 
     return (
         <SafeAreaView style={{ backgroundColor: '#101010', flex: 1 }}>
-            <Header title="Update profile" />
+            <Header onPress={() => navigate.goBack()} title="Update profile" />
             <View style={styles.container}>
-                <Input title="Email" placeholder="email" editable={false} value={email} />
-                <Input textChanged={(e) => handleName(e)} title="Name" placeholder="name" editable={true} value={userName} />
-                {checkName && <Err title="Your name must have at least 1 keyword and less than 20 keywords" />}
-                <Input textChanged={(e) => handleAge(e)} title="Age" placeholder="age" editable={true} value={userAge} />
-                {checkAge && <Err title="Your age is invalid" />}
-                <View style={{ flex: 1 }}></View>
-                <Btn onPress={() => checkSubmit && handleSubmit()} title="Update" optionalStyle={styles.btnSubmit} />
+                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
+                    <Input title="Email" placeholder="email" editable={false} value={email} />
+                    <Input textChanged={(e) => handleName(e)} title="Name" placeholder="name" editable={true} value={userName} />
+                    {checkName && <Err title="Your name must have at least 1 keyword and less than 20 keywords" />}
+                    <Input textChanged={(e) => handleAge(e)} title="Age" placeholder="age" editable={true} value={userAge} />
+                    {checkAge && <Err title="Your age is invalid" />}
+                    <View style={{ flex: 1,marginVertical:5 }}></View>
+                    <Btn onPress={() => checkSubmit && handleSubmit()} title="Update" optionalStyle={styles.btnSubmit} />
+                </ScrollView>
             </View>
         </SafeAreaView>
     )

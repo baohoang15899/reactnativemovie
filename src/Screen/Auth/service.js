@@ -5,16 +5,34 @@ import {uploadImage} from '../../Camera/Index'
 
 
 const saveUser = async id => {
-  console.log(id + "cdj vậy");
   const user = await firestore().collection('user').doc(id).get();
+  const favorite = await firestore().collection('favorite').doc(id).get();
   const data = user.data();
-  console.log(data + ' data ');
+  if (favorite.exists) {
+    const listResults = favorite.data() 
+    return {id,listResults,...data};
+  }
+  console.log(JSON.stringify(data) + ' data ');
   return {id, ...data};
 };
 
+const createFavorite = async(id) =>{
+    if(id){
+        const data = []
+        await firestore().collection('favorite').doc(id).set({
+            list:data
+        });
+    }
+}
+
 export const getUser = async({id}) =>{
     const user = await firestore().collection('user').doc(id).get();
+    const favorite = await firestore().collection('favorite').doc(id).get();
     const data = user.data();
+    if (favorite.exists) {
+      const listResults = favorite.data() 
+      return {id,listResults,...data};
+    }
     return {id,...data};
 }
 
@@ -56,7 +74,8 @@ export const login = async ({email,pass}) => {
 export const register = async ({email, pass, name}) => {
   try {
     await auth().createUserWithEmailAndPassword(email, pass);
-    const id =  auth().currentUser.uid.toString();
+    const id =  auth().currentUser.uid;
+    createFavorite(auth().currentUser.uid)
     console.log(id + " lúc tạo nick");
     save(id,name,email)
     return saveUser(id);

@@ -1,11 +1,9 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { Isection } from '../../../Interfaces'
 import {styles} from '../style'
 
-interface Isection {
-    section:string,
-    content:any
-}
+
 
 export default function section({section,content}: Isection) {
     return (
