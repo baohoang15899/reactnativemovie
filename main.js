@@ -36,6 +36,7 @@ export default function main() {
         auth().onAuthStateChanged((info)=>{
             if (info) {
                 saveId(info.uid)
+                dispatch({type:GET_USER,payload:{id:info.uid}})
             }
             else{
                 removeId()

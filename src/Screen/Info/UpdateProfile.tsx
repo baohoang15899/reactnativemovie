@@ -68,7 +68,7 @@ export default function UpdateProfile() {
         <SafeAreaView style={{ backgroundColor: '#101010', flex: 1 }}>
             <Header onPress={() => navigate.goBack()} title="Update profile" />
             <View style={styles.container}>
-                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
+                <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='always' contentContainerStyle={{ flexGrow: 1 }}>
                     <Input title="Email" placeholder="email" editable={false} value={email} />
                     <Input textChanged={(e) => handleName(e)} title="Name" placeholder="name" editable={true} value={userName} />
                     {checkName && <Err title="Your name must have at least 1 keyword and less than 20 keywords" />}

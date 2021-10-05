@@ -28,7 +28,7 @@ export default function Index() {
 
     return (
         <View style={darkMode.container}>
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <ScrollView keyboardShouldPersistTaps='always' contentContainerStyle={{ flexGrow: 1 }}>
                 <Header title="Log in" />
                 <View style={darkMode.option}>
                     <Text style={darkMode.textOption}>

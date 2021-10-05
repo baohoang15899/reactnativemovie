@@ -54,7 +54,7 @@ export default function Index() {
 
   return (
     <View style={darkMode.container}>
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}} keyboardShouldPersistTaps='always'>
         <Header title="Sign up" />
         <View style={darkMode.option}>
           <Text style={darkMode.textOption}>
